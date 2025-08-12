@@ -1,7 +1,130 @@
-<!doctype html><meta charset="utf-8"><title>Danke!</title>
-<body style="font-family:system-ui;margin:40px;max-width:720px">
-<h1>Danke für deinen Kauf!</h1>
-<p>Du erhältst gleich eine E-Mail-Bestätigung. Innerhalb von 24h senden wir dir deinen ersten Lead-Report.</p>
-<p>Support: <a href="mailto:kontakt@ecom-shop-radar.de">kontakt@ecom-shop-radar.de</a></p>
-<a href="/">← Zur Startseite</a>
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Danke – E-Com Shop-Radar</title>
+  <meta name="theme-color" content="#0ea5e9" />
+  <link rel="icon" href="/favicon.ico">
+  <style>
+    :root{
+      --bg:#0b0f1a;--card:#0f172a;--muted:#94a3b8;--text:#e2e8f0;
+      --brand:#0ea5e9;--brand-dark:#0284c7;--ok:#22c55e;--radius:18px;
+      --shadow:0 10px 30px rgba(2,132,199,.25);
+    }
+    *{box-sizing:border-box} html,body{height:100%}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial;
+      color:var(--text);background:radial-gradient(1200px 800px at 80% -20%,rgba(14,165,233,.2),transparent 60%),var(--bg);
+      -webkit-font-smoothing:antialiased}
+    .wrap{max-width:980px;margin:0 auto;padding:32px 20px}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,0) 60%),var(--card);
+      border:1px solid rgba(148,163,184,.15);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px}
+    h1{margin:0 0 10px;font-size:clamp(28px,3.4vw,44px);line-height:1.1}
+    .subtitle{color:var(--muted);margin:0 0 20px;font-size:18px}
+    .badge{display:inline-block;background:rgba(14,165,233,.15);color:#7dd3fc;border:1px solid rgba(125,211,252,.4);
+      padding:6px 10px;border-radius:999px;font-weight:700;font-size:12px;letter-spacing:.2px;margin-right:8px}
+    .grid{display:grid;gap:16px;grid-template-columns:1fr; margin-top:18px}
+    @media(min-width:860px){.grid{grid-template-columns:2fr 1fr}}
+    .panel{background:rgba(2,6,23,.35);border:1px dashed rgba(148,163,184,.2);border-radius:14px;padding:16px}
+    .muted{color:var(--muted)}
+    .ok{color:var(--ok);font-weight:800}
+    .btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+    .btn{display:inline-flex;align-items:center;gap:.6rem;background:var(--brand);color:#001018;
+      padding:14px 20px;border-radius:14px;font-weight:800;text-decoration:none;box-shadow:var(--shadow);
+      transition:transform .12s ease, background .2s}
+    .btn:hover{transform:translateY(-1px);background:var(--brand-dark)}
+    .btn.ghost{background:transparent;color:var(--text);border:1px solid rgba(148,163,184,.35);box-shadow:none}
+    .list{margin:10px 0 0;padding-left:18px}
+    small{color:var(--muted)}
+    footer{margin-top:22px;color:var(--muted);text-align:center}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div id="badges"></div>
+      <h1 id="title">Danke für deinen Kauf!</h1>
+      <p class="subtitle" id="subtitle">Deine Zahlung war erfolgreich.</p>
+
+      <div class="grid">
+        <div class="panel">
+          <h3 id="whatsnext">Wie geht’s weiter?</h3>
+          <ul class="list" id="steps">
+            <li>Du erhältst gleich eine E-Mail-Bestätigung von Stripe.</li>
+            <li>Wir richten dein Abo ein und schicken innerhalb von <span class="ok">24&nbsp;Stunden</span> deinen ersten Lead-Report.</li>
+            <li>Fragen? Schreib uns: <a href="mailto:kontakt@ecom-shop-radar.de">kontakt@ecom-shop-radar.de</a></li>
+          </ul>
+          <div class="btns" id="ctas">
+            <a class="btn" href="/">← Zur Startseite</a>
+            <a class="btn ghost" href="mailto:kontakt@ecom-shop-radar.de">Support kontaktieren</a>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h4>Rechnungen & Abo</h4>
+          <p class="muted">Rechnungen versenden wir automatisch per E-Mail. Kündigen oder Tarif wechseln ist jederzeit möglich.</p>
+          <small>Hinweis: Du befindest dich aktuell in der Sandbox-Testumgebung.</small>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      © <span id="y"></span> E-Com Shop-Radar · <a href="/impressum.html">Impressum</a> · <a href="/datenschutz.html">Datenschutz</a>
+    </footer>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(location.search);
+    const plan = (params.get('plan') || 'pilot').toLowerCase();
+
+    const byPlan = {
+      pilot: {
+        badge: 'Pilot · 14 Tage kostenlos',
+        title: 'Willkommen im Pilot!',
+        subtitle: 'Deine 14-tägige Testphase ist aktiv. Danach 49 €/Monat – kündbar jederzeit.',
+        steps: [
+          'Du erhältst gleich eine Bestätigungs-E-Mail von Stripe.',
+          'Wir starten deinen Daten-Feed und senden innerhalb von 24 Stunden deinen ersten Lead-Report.',
+          'Während des Tests kannst du jederzeit in Pro wechseln.'
+        ]
+      },
+      pro: {
+        badge: 'Pro · 199 €/Monat',
+        title: 'Danke – Pro ist aktiv!',
+        subtitle: 'Du erhältst ab jetzt tagesaktuell 100+ Leads, inkl. CSV & einfacher API.',
+        steps: [
+          'Zugangsdaten (CSV/API) kommen per E-Mail.',
+          'Dein erster täglicher Report wird morgen um 9 Uhr zugestellt.',
+          'Support & Onboarding: Wir melden uns proaktiv heute noch.'
+        ]
+      },
+      enterprise: {
+        badge: 'Enterprise · 399 €/Monat',
+        title: 'Danke – Enterprise ist aktiv!',
+        subtitle: 'Maximale Kapazität (500+ Leads/Tag), API/Webhooks & Prior-Support.',
+        steps: [
+          'Wir stimmen innerhalb von 24 Stunden die Filter & Webhooks mit dir ab.',
+          'Dein dedizierter Kanal für Prior-Support wird eingerichtet.',
+          'Erste Lieferung morgen um 9 Uhr (oder nach Wunschzeit).'
+        ]
+      }
+    };
+
+    const cfg = byPlan[plan] || byPlan.pilot;
+
+    document.getElementById('y').textContent = new Date().getFullYear();
+    const badges = document.getElementById('badges');
+    badges.innerHTML = `<span class="badge">${cfg.badge}</span>`;
+    document.getElementById('title').textContent = cfg.title;
+    document.getElementById('subtitle').textContent = cfg.subtitle;
+
+    const stepsUl = document.getElementById('steps');
+    stepsUl.innerHTML = cfg.steps.map(s => `<li>${s}</li>`).join('');
+
+    // Optional: Portal-Link, falls vorhanden (ersetzen, wenn du einen festen Portal-URL nutzt)
+    // const portal = 'https://billing.stripe.com/p/login/TEST_PORTAL_LINK';
+    // document.getElementById('ctas').insertAdjacentHTML('beforeend',
+    //   `<a class="btn ghost" href="${portal}">Abo verwalten</a>`);
+  </script>
 </body>
+</html>
