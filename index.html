@@ -213,17 +213,49 @@
       </div>
     </section>
 
-    <!-- Stripe Preistabelle (ID korrigiert auf #pricing, damit der Nav-Link funktioniert) -->
-    <section id="pricing" class="container" style="max-width:1100px;margin:60px auto;">
-      <div class="card" style="padding:18px;margin-bottom:14px;">
-        <p class="muted" style="margin:0;">Pilot: <strong>14 Tage kostenlos</strong>, danach <strong>49 €/Monat</strong>. Pro: 199 €/Monat. Enterprise: 399 €/Monat. Kündigung jederzeit.</p>
-      </div>
-      <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
-      <stripe-pricing-table
-        pricing-table-id="prctbl_1RvEtSFw9PQErVc9IT3X8fU5"
-        publishable-key="pk_test_51RufCYFw9PQErVc9GZZfVxHZbINqHQJQPS7Z3MpWOMnISMIygYYtkDKhw3FazzgYPnHTBdGdJIu4OM040OEZxw4L00M2TVNAlf">
-      </stripe-pricing-table>
-    </section>
+   <section id="pricing" class="container pricing" style="padding:60px 0;">
+  <!-- Info-Badge oben lassen, der bleibt wie er ist -->
+
+  <div class="price card">
+    <h4>Pilot</h4>
+    <div class="num">49 €</div>
+    <ul>
+      <li>Test­run 14 Tage <strong>kostenlos</strong></li>
+      <li>täglich bis 20 neue Leads</li>
+      <li>CSV-Export</li>
+    </ul>
+    <div class="mt-6">
+      <a class="btn" href="https://buy.stripe.com/test_aFa00j4JP4iMgQk4A943S00">Pilot starten</a>
+    </div>
+  </div>
+
+  <div class="price card" style="border-color: rgba(14,165,233,.45)">
+    <span class="badge">Beliebt</span>
+    <h4>Pro</h4>
+    <div class="num">199 € / Monat</div>
+    <ul>
+      <li>100+ Leads pro Tag</li>
+      <li>CSV & einfache API</li>
+      <li>Filter (Branche, System)</li>
+    </ul>
+    <div class="mt-6">
+      <a class="btn" href="https://buy.stripe.com/test_3cI14n90502w9nS8Qp43S01">Pro buchen</a>
+    </div>
+  </div>
+
+  <div class="price card">
+    <h4>Enterprise</h4>
+    <div class="num">399 € / Monat</div>
+    <ul>
+      <li>500+ Leads pro Tag</li>
+      <li>API/Webhooks</li>
+      <li>Priorisierte Unterstützung</li>
+    </ul>
+    <div class="mt-6">
+      <a class="btn" href="https://buy.stripe.com/test_14A3cvcch3eI2Zu8Qp43S02">Anfragen</a>
+    </div>
+  </div>
+</section>
 
     <!-- Checkout-CTA -->
 <section id="checkout" class="container center mt-8">
